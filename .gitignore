@@ -1,0 +1,45 @@
+# Gradle files
+.gradle/
+build/
+
+# Android Studio files
+.idea/
+*.iml
+*.iws
+.externalNativeBuild
+.cxx
+local.properties
+
+# Generated files
+app/build/
+capture/
+
+# Log files
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets
+signing.properties
+*.jks
+*.keystore
+
+# Build Cache
+.build-cache/
+
+# User-specific configuration
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/modules/
+
+# Navigation Editor temp files
+.navigation/
+
+# Android Profiler
+*.hprof
