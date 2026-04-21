@@ -6,7 +6,7 @@ import com.ghost.android.test.ui.model.EngineResult
 import com.ghost.android.test.util.forceGC
 import com.ghost.android.test.util.getCurrentThreadAllocatedBytes
 import com.ghost.serialization.Ghost
-import com.ghost.serialization.generated.GhostModuleRegistry_app
+import com.ghost.serialization.benchmark.GhostModuleRegistry_app
 import com.ghost.serialization.ktor.ghost
 import com.google.gson.Gson
 import com.squareup.moshi.Moshi
@@ -63,7 +63,7 @@ class RickAndMortyRepository {
 
             val responseBytes = client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) throw Exception("API Error on page $i: ${response.code}")
-                response.body?.bytes() ?: throw Exception("Empty Body")
+                response.body?.bytes() ?: throw RuntimeException("Empty response Body")
             }
             allBytes.add(responseBytes)
         }

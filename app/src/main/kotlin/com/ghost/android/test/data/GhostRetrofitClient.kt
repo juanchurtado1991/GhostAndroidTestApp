@@ -1,7 +1,7 @@
 package com.ghost.android.test.data
 
 import com.ghost.android.test.domain.RickAndMortyResponse
-import com.ghost.serialization.generated.GhostModuleRegistry_app
+import com.ghost.serialization.benchmark.GhostModuleRegistry_app
 import com.ghost.serialization.retrofit.GhostConverterFactory
 import retrofit2.Retrofit
 import retrofit2.http.GET

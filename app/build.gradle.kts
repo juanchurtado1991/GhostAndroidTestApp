@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,11 +7,12 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.ktorfit)
+    alias(libs.plugins.ghost)
 }
 
 android {
     namespace = "com.ghost.android.test"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ghost.android.test"
@@ -21,17 +24,15 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-    
-    kotlinOptions {
-        jvmTarget = "17"
     }
     
     buildFeatures {
@@ -42,6 +43,12 @@ android {
         getByName("main") {
             manifest.srcFile("src/main/AndroidManifest.xml")
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
@@ -57,13 +64,6 @@ dependencies {
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose.ui)
-    
-    // Ghost Serialization (Consumption from Catalog)
-    implementation(libs.ghost.api)
-    implementation(libs.ghost.serialization)
-    implementation(libs.ghost.retrofit)
-    implementation(libs.ghost.ktor)
-    ksp(libs.ghost.compiler)
 
     // Benchmark Contenders & Networking
     implementation(libs.bundles.retrofit.moshi)
